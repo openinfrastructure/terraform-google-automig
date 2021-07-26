@@ -66,8 +66,8 @@ resource google_compute_health_check "health" {
   unhealthy_threshold = 3
 
   http_health_check {
-    port         = 9000
-    request_path = "/status.json"
+    port         = var.health_check_port
+    request_path = var.health_check_path
   }
 }
 
