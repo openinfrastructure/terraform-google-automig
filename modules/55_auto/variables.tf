@@ -115,3 +115,15 @@ variable "startup_script" {
   type        = string
   default     = ""
 }
+
+variable "health_check_port" {
+  description = "The port for health checks, typically the port of the workload service"
+  type        = number
+  default     = 9000
+}
+
+variable "health_check_path" {
+  description = "The path for health checks, typically /healthz or something equivalent"
+  type        = string
+  default     = "/healthz"
+}

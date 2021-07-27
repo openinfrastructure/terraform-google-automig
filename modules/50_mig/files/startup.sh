@@ -92,6 +92,8 @@ setup_status_api() {
   echo '{status: "OK", host: "'"${HOSTNAME}"'"}' > "${status_file}"
   install -v -o 0 -g 0 -m 0755 -d /var/lib/status
   install -v -o 0 -g 0 -m 0644 "${status_file}" /var/lib/status/status.json
+  install -v -o 0 -g 0 -m 0644 "${status_file}" /var/lib/status/healthz
+  install -v -o 0 -g 0 -m 0644 "${status_file}" /var/lib/status/healthz.json
 
   status_unit1="$(mktemp)"
   cat <<EOF >"${status_unit1}"
