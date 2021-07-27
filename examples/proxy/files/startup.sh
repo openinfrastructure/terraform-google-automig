@@ -9,6 +9,11 @@ cat <<EOF >/etc/apache2/mods-available/proxy.conf
 <IfModule mod_proxy.c>
 Listen 3128
 ProxyRequests On
+
+# Block access to the metadata server, otherwise clients could access workload
+# identity (service account) credentials
+ProxyBlock metadata.google.internal metadata.google metadata 169.254.169.254
+
 <Proxy *>
   AddDefaultCharset off
   # This is an open proxy.  Control access with the VPC firewall.
