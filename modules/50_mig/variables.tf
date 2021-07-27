@@ -97,7 +97,7 @@ variable "hc_initial_delay_secs" {
 variable "tags" {
   description = "Additional network tags added to instances.  Useful for opening VPC firewall access.  TCP Port 80 must be allowed into nic0 for health checking to work."
   type        = list(string)
-  default     = ["allow-health-check"]
+  default     = ["allow-health-checks"]
 }
 
 variable "disk_size_gb" {
