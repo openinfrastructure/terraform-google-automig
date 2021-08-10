@@ -3,7 +3,7 @@
 # Configure Apache 2 as a forward proxy
 
 apt -qq -y update
-apt -qq -y install apache2
+apt -qq -y install apache2 tcpdump lsof
 
 cat <<EOF >/etc/apache2/mods-available/proxy.conf
 <IfModule mod_proxy.c>
@@ -30,6 +30,7 @@ echo OK | tee /var/www/html/healthz
 
 a2enmod proxy
 a2enmod proxy_http
+a2enmod proxy_connect
 a2enmod proxy_balancer
 a2enmod lbmethod_byrequests
 

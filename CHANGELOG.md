@@ -1,3 +1,7 @@
+v1.1.0 - 2021-08-10
+
+ * Allow consumers to specify the tags input variable.
+
 v1.0.2 - 2021-07-26
 ===
 
