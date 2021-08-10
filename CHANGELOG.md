@@ -1,3 +1,7 @@
+v1.2.0 - 2021-08-10
+
+ * Enable HTTP CONNECT proxy for outbound https on port 443
+
 v1.1.0 - 2021-08-10
 
  * Allow consumers to specify the tags input variable.
