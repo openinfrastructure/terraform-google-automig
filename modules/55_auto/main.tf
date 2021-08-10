@@ -40,6 +40,7 @@ module "mig" {
   name_prefix = var.name_prefix
   region      = var.region
   zones       = local.zones
+  tags        = var.tags
 
   nic0_project = var.project_id
   nic0_network = var.nic0_network
