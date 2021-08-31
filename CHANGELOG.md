@@ -1,3 +1,10 @@
+v1.4.0 - 2021-08-31
+===
+
+ * Run iperf2 and iperf3 servers on proxy example to measure throughput to the
+   proxies.  This is intended to determine which GCP region is best to use from
+   a given on-prem data center when multiple interconnects are available.
+
 v1.3.0 - 2021-08-23
 ===
 
