@@ -106,6 +106,59 @@ EOF
   systemctl restart google-cloud-ops-agent
 fi
 
-## Ops Agent apache2 configuration: This isn't ready because it doesn't result in structured logs.
+setup_iperf2_server() {
+  local svcfile
+  apt install -y -qq iperf
+  svcfile="$(mktemp)"
+  cat <<EOF>"$svcfile"
+[Unit]
+Description=iperf server
+After=network-online.target
+Wants=network-online.target
 
-# Ops Agent configuration
+[Service]
+Type=simple
+ExecStart=/usr/bin/iperf --server --interval 5
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+EOF
+  install -m 0644 -o 0 -g 0 "$svcfile" /etc/systemd/system/iperf2-server.service
+  systemctl daemon-reload
+  systemctl start iperf2-server
+  systemctl enable iperf2-server
+}
+
+setup_iperf3_server() {
+  local svcfile
+  apt install -y -qq iperf3
+  svcfile="$(mktemp)"
+  cat <<EOF>"$svcfile"
+[Unit]
+Description=iperf3 server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/iperf3 --server --interval 5
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+EOF
+  install -m 0644 -o 0 -g 0 "$svcfile" /etc/systemd/system/iperf3-server.service
+  systemctl daemon-reload
+  systemctl start iperf3-server
+  systemctl enable iperf3-server
+}
+
+
+if ! [[ -e /etc/systemd/system/iperf2-server.service ]]; then
+  setup_iperf2_server
+fi
+
+if ! [[ -e /etc/systemd/system/iperf3-server.service ]]; then
+  setup_iperf3_server
+fi
